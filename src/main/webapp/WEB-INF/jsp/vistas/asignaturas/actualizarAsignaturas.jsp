@@ -14,7 +14,7 @@
 </head>
 <body>
 	<h2>Gestión de colegio</h2>
-	<%@include file="/menu.html"%>
+	<%@include file="../../menu.html"%>
 	<h2>Modificación de asignaturas</h2>
 	<div class="container">
 		<div class="form">

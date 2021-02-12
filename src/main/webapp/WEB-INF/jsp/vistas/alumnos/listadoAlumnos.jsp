@@ -14,7 +14,7 @@
 <body>
 
 <h1>Listado alumnos</h1>
-<%@include file="/menu.html" %>
+<%@include file="../../menu.html" %>
 
 
 <div class="container">
