@@ -57,8 +57,12 @@ public class AsignaturasController {
 		return "vistas/asignaturas/borrarAsignaturas";
 	}
 	@PostMapping(value = "formularioborrarasignatura")
-	public String formularioBorrarAsignaturas(@RequestParam(value = "id",required = false)Integer id) {
-		asignaturaRepository.deleteById(id);
+	public String formularioBorrarAsignaturas(@RequestParam(value = "id", required = false) Integer id,
+			@RequestParam("nombre") String nombre, @RequestParam(value = "curso", required = false) Integer curso,
+			@RequestParam(value = "tasa", required = false) Double tasa, ModelMap model) {
+
+		List<Asignaturas> listaAsignaturas=asignaturaRepository.buscaAsignaturas(id, nombre,curso,tasa);
+		model.addAttribute("lista",listaAsignaturas);
 		return "vistas/asignaturas/borrarAsignaturas";
 	}
 }
