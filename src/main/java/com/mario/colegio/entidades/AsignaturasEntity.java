@@ -20,7 +20,7 @@ public class AsignaturasEntity {
 	private int curso;
 	
 	@Column(name ="tasa")
-	private double tasa;
+	private Double tasa;
 
 	public AsignaturasEntity() {
 		super();
@@ -58,11 +58,11 @@ public class AsignaturasEntity {
 		this.curso = curso;
 	}
 
-	public double getTasa() {
+	public Double getTasa() {
 		return tasa;
 	}
 
-	public void setTasa(double tasa) {
+	public void setTasa(Double tasa) {
 		this.tasa = tasa;
 	}
 	

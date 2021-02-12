@@ -5,7 +5,7 @@ public class Asignaturas {
 	private Integer id;
 	private String nombre;
 	private Integer curso;
-	private Double tasa;
+	private double tasa;
 	
 	public Asignaturas() {
 		// TODO Auto-generated constructor stub
