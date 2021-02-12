@@ -79,18 +79,29 @@ public class AlumnosController {
 		
 	}
 	@GetMapping(value="formularioactualizaralumnos")
-	public String ListadoActualizar(ModelMap model) {
-		model.addAttribute("comboMunicipios", combo.comboMunicipios());
+	public String ListadoActualizar() {
+		
 		return "vistas/alumnos/actualizarAlumnos";
 		
 	}
 	@PostMapping(value="formularioactualizaralumnos")
-	public String ListadoActualizar(@RequestParam(value = "id", required = false) Integer id,
+	public String ListadoActualizarA(@RequestParam(value = "id", required = false) Integer id,
+			@RequestParam("nombre") String nombre, ModelMap model) {
+		List<Alumno> listaAlumnos= alumnoRepository.buscaAlumnoporIdyNombre(id, nombre);
+		model.addAttribute("lista",listaAlumnos);
+		model.addAttribute("listaMunicipios", combo.comboMunicipios());
+		return "vistas/alumnos/actualizarAlumnos";
+		
+	}
+	@PostMapping(value="actualizaralumno")
+	public String ActualizarAlumno(@RequestParam(value = "id", required = false) Integer id,
 			@RequestParam("nombre") String nombre, @RequestParam(value = "municipios") Integer idMunicipio,
 			@RequestParam(value = "familiaNumerosa") Integer familiaNumerosa, ModelMap model) {
-		List<Alumno> listaAlumnos= alumnoRepository.buscaAlumnoporIdyNombre(id, nombre);
-		
-		model.addAttribute("lista",listaAlumnos);	
+		familiaNumerosa = (familiaNumerosa == null) ? 0 : 1;
+	
+		model.addAttribute("listaMunicipios", combo.comboMunicipios());
+		AlumnoEntity alumno=new AlumnoEntity(id,nombre,idMunicipio,familiaNumerosa);
+		alumnoRepository.save(alumno);
 		return "vistas/alumnos/actualizarAlumnos";
 		
 	}

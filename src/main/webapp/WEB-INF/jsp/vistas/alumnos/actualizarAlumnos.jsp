@@ -51,12 +51,12 @@
 					<br>
 					<label for="familiaNumerosa">Familia numerosa</label>
 						
-					<c:if test="${alumno.famNumerosa == 1}">
-						<input type="checkbox" id="familiaNumerosa" name="familiaNumerosa" checked>
+					<c:if test="${alumno.familiaNumerosa == 1}">
+						<input type="checkbox" id="familiaNumerosa" name="familiaNumerosa" value="1" checked>
 					</c:if>
 					
-					<c:if test="${alumno.famNumerosa == 0}">
-						<input type="checkbox" id="familiaNumerosa" name="familiaNumerosa" >
+					<c:if test="${alumno.familiaNumerosa == 0}">
+						<input type="checkbox" id="familiaNumerosa" name="familiaNumerosa" value="0">
 					</c:if>
 					<br>
 					
