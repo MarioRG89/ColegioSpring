@@ -123,7 +123,7 @@ public class NotasController {
 		AlumnoEntity a = optinalAlumno.get();
 		Optional<AsignaturasEntity> optinalAsignatura = asignatura.findById(idAsignatura);
 		AsignaturasEntity asig = optinalAsignatura.get();
-		NotasEntity n = new NotasEntity(a, asig, nota, fecha);
+		NotasEntity n = new NotasEntity(a, asig, nota, fecha,id);
 		notasRepository.save(n);
 		return "vistas/notas/actualizarNotas";
 	}
