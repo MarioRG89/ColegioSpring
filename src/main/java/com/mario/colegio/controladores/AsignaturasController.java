@@ -65,4 +65,9 @@ public class AsignaturasController {
 		model.addAttribute("lista",listaAsignaturas);
 		return "vistas/asignaturas/borrarAsignaturas";
 	}
+	@PostMapping(value="borrarasignatura")
+	public String borrarAsignatura(@RequestParam(value = "id",required = false)Integer id) {
+		asignaturaRepository.deleteById(id);
+		return "vistas/asignaturas/borrarAsignaturas";
+	}
 }
