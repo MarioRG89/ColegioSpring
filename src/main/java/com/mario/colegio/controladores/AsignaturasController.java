@@ -31,7 +31,7 @@ public class AsignaturasController {
 	
 	@PostMapping(value = "insertarasignaturas")
 	public String InsertarAsignaturas(@RequestParam(value = "id", required = false) Integer id,
-			@RequestParam("nombre") String nombre, @RequestParam(value = "curso") Integer curso,
+			@RequestParam("nombre") String nombre, @RequestParam(value = "curso",required = false) Integer curso,
 			@RequestParam(value = "tasa") Double tasa, ModelMap model) {
 		AsignaturasEntity a= new AsignaturasEntity(id, nombre, curso, tasa);
 		asignaturaRepository.save(a);
@@ -57,7 +57,7 @@ public class AsignaturasController {
 		return "vistas/asignaturas/borrarAsignaturas";
 	}
 	@PostMapping(value = "formularioborrarasignatura")
-	public String formularioBorrarAsignaturas(@RequestParam(value = "id", required = false) Integer id,
+	public String formularioListarBorrarAsignaturas(@RequestParam(value = "id", required = false) Integer id,
 			@RequestParam("nombre") String nombre, @RequestParam(value = "curso", required = false) Integer curso,
 			@RequestParam(value = "tasa", required = false) Double tasa, ModelMap model) {
 
@@ -69,5 +69,27 @@ public class AsignaturasController {
 	public String borrarAsignatura(@RequestParam(value = "id",required = false)Integer id) {
 		asignaturaRepository.deleteById(id);
 		return "vistas/asignaturas/borrarAsignaturas";
+	}
+	
+	@GetMapping(value="formularioactualizarasignatura")
+	public String formularioActualizarasignatura() {
+		return "vistas/asignaturas/actualizarAsignaturas";
+	}
+	@PostMapping(value="formularioactualizarasignatura")
+	public String formularioListarActualizarasignatura(@RequestParam(value = "id", required = false) Integer id,
+			@RequestParam("nombre") String nombre, @RequestParam(value = "curso", required = false) Integer curso,
+			@RequestParam(value = "tasa", required = false) Double tasa, ModelMap model) {
+		List<Asignaturas> listaAsignaturas=asignaturaRepository.buscaAsignaturas(id, nombre,curso,tasa);
+		model.addAttribute("lista",listaAsignaturas);
+		return "vistas/asignaturas/actualizarAsignaturas";
+	}
+	@PostMapping(value="actualizarasignatura")
+	public String actualizaAsignatura(@RequestParam(value = "id", required = false) Integer id,
+			@RequestParam("nombre") String nombre, @RequestParam(value = "curso", required = false) Integer curso,
+			@RequestParam(value = "tasa", required = false) Double tasa, ModelMap model) {
+		AsignaturasEntity asig = new AsignaturasEntity(id,nombre,curso,tasa);
+		asignaturaRepository.save(asig);
+		
+		return "vistas/asignaturas/actualizarAsignaturas";
 	}
 }
