@@ -45,19 +45,26 @@ public class NotasEntity {
 		this.id=id;
 	}
 
-	public NotasEntity( AlumnoEntity alumnos, AsignaturasEntity asignaturas, int nota, String fecha) {
+	
+	
+
+	public NotasEntity(AlumnoEntity alumnos, AsignaturasEntity asignaturas, int nota, String fecha) {
 		super();
-		
 		this.alumnos = alumnos;
 		this.asignaturas = asignaturas;
 		this.nota = nota;
 		this.fecha = fecha;
 	}
-	
-	
+
+
+
+
 	public NotasEntity() {
 		super();
 	}
+
+
+
 
 	public int getId() {
 		return id;

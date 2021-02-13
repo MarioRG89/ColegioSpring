@@ -22,19 +22,6 @@ public class Notas {
 
 
 
-
-	public Notas(Integer idAlumno,String nombreAlumno,  String nombreAsignatura, Integer nota, String fecha,Integer id) {
-		super();
-		this.idAlumno = idAlumno;
-		this.nota = nota;
-		this.fecha = fecha;
-		this.nombreAlumno = nombreAlumno;
-		this.nombreAsignatura = nombreAsignatura;
-		this.id= id;
-	}
-	
-
-
 	public Notas(Integer idAlumno, Integer nota, String fecha, String nombreAlumno, String nombreAsignatura) {
 		super();
 		this.idAlumno = idAlumno;

@@ -26,6 +26,16 @@ public class AlumnoEntity {
 
 	public AlumnoEntity() {}
 	
+	
+	
+	public AlumnoEntity(int id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+	}
+
+
+
 	public AlumnoEntity(int id, String nombre, int idMunicipio, int famNumerosa) {
 		super();
 		this.id = id;

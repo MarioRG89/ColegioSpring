@@ -26,6 +26,14 @@ public class AsignaturasEntity {
 		super();
 	}
 
+	
+	public AsignaturasEntity(int id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+	}
+
+
 	public AsignaturasEntity(int id, String nombre, int curso, double tasa) {
 		super();
 		this.id = id;

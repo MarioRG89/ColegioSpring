@@ -19,7 +19,9 @@ import com.mario.colegio.repositories.MunicipioRepository;
 public class CombosDAOImpl implements CombosDAO {
 	@Autowired
 	private MunicipioRepository municipioRespository;
+	@Autowired
 	private AlumnoRepository alumnoRepository;
+	@Autowired
 	private AsignaturaRepository asignaturaRepository;
 	
 	@Override
