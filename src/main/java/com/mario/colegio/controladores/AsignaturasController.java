@@ -1,7 +1,5 @@
 package com.mario.colegio.controladores;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,19 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mario.colegio.daos.CombosDAO;
-import com.mario.colegio.dtos.Asignaturas;
-import com.mario.colegio.entidades.AsignaturasEntity;
-import com.mario.colegio.repositories.AsignaturaRepository;
+import com.mario.colegio.daos.AsignaturasDAO;
 
 @Controller
 public class AsignaturasController {
 	
-	@Autowired
-	private CombosDAO combo;
 	
 	@Autowired
-	private AsignaturaRepository asignaturaRepository;
+	private AsignaturasDAO asignatura;
 	
 	@GetMapping(value = "insertarasignaturas")
 	public String formularioInsertarAsignaturas() {
@@ -33,8 +26,7 @@ public class AsignaturasController {
 	public String InsertarAsignaturas(@RequestParam(value = "id", required = false) Integer id,
 			@RequestParam("nombre") String nombre, @RequestParam(value = "curso",required = false) Integer curso,
 			@RequestParam(value = "tasa") Double tasa, ModelMap model) {
-		AsignaturasEntity a= new AsignaturasEntity(id, nombre, curso, tasa);
-		asignaturaRepository.save(a);
+		asignatura.insertarAsignaturas(id, nombre, curso, tasa);
 		return "vistas/asignaturas/insertarAsignaturas";
 	}
 	@GetMapping(value = "listadoasignaturas")
@@ -46,14 +38,11 @@ public class AsignaturasController {
 	public String listarAsignaturas(@RequestParam(value = "id", required = false) Integer id,
 			@RequestParam("nombre") String nombre, @RequestParam(value = "curso", required = false) Integer curso,
 			@RequestParam(value = "tasa", required = false) Double tasa, ModelMap model) {
-		
-		List<Asignaturas> listaAsignaturas=asignaturaRepository.buscaAsignaturas(id, nombre,curso,tasa);
-		model.addAttribute("lista",listaAsignaturas);
+		model.addAttribute("lista",asignatura.obtenerTodasAsignaturas(id, nombre, curso, tasa));
 		return "vistas/asignaturas/listadoAsignaturas";
 	}
 	@GetMapping(value = "formularioborrarasignatura")
 	public String formularioBorrarAsignaturas() {
-		
 		return "vistas/asignaturas/borrarAsignaturas";
 	}
 	@PostMapping(value = "formularioborrarasignatura")
@@ -61,13 +50,13 @@ public class AsignaturasController {
 			@RequestParam("nombre") String nombre, @RequestParam(value = "curso", required = false) Integer curso,
 			@RequestParam(value = "tasa", required = false) Double tasa, ModelMap model) {
 
-		List<Asignaturas> listaAsignaturas=asignaturaRepository.buscaAsignaturas(id, nombre,curso,tasa);
-		model.addAttribute("lista",listaAsignaturas);
+		
+		model.addAttribute("lista",asignatura.obtenerTodasAsignaturas(id, nombre, curso, tasa));
 		return "vistas/asignaturas/borrarAsignaturas";
 	}
 	@PostMapping(value="borrarasignatura")
 	public String borrarAsignatura(@RequestParam(value = "id",required = false)Integer id) {
-		asignaturaRepository.deleteById(id);
+		asignatura.borrarAsignatura(id);
 		return "vistas/asignaturas/borrarAsignaturas";
 	}
 	
@@ -79,16 +68,14 @@ public class AsignaturasController {
 	public String formularioListarActualizarasignatura(@RequestParam(value = "id", required = false) Integer id,
 			@RequestParam("nombre") String nombre, @RequestParam(value = "curso", required = false) Integer curso,
 			@RequestParam(value = "tasa", required = false) Double tasa, ModelMap model) {
-		List<Asignaturas> listaAsignaturas=asignaturaRepository.buscaAsignaturas(id, nombre,curso,tasa);
-		model.addAttribute("lista",listaAsignaturas);
+		model.addAttribute("lista",asignatura.obtenerTodasAsignaturas(id, nombre, curso, tasa));
 		return "vistas/asignaturas/actualizarAsignaturas";
 	}
 	@PostMapping(value="actualizarasignatura")
 	public String actualizaAsignatura(@RequestParam(value = "id", required = false) Integer id,
 			@RequestParam("nombre") String nombre, @RequestParam(value = "curso", required = false) Integer curso,
 			@RequestParam(value = "tasa", required = false) Double tasa, ModelMap model) {
-		AsignaturasEntity asig = new AsignaturasEntity(id,nombre,curso,tasa);
-		asignaturaRepository.save(asig);
+		
 		
 		return "vistas/asignaturas/actualizarAsignaturas";
 	}
