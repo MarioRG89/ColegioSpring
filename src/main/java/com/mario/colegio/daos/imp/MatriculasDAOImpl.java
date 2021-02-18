@@ -1,5 +1,7 @@
 package com.mario.colegio.daos.imp;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,13 +40,18 @@ public class MatriculasDAOImpl implements MatriculasDAO {
 
 	@Override
 	public Integer insertarMatriculas(Integer idAsignatura, Integer idAlumno, String fecha, Double importe) {
+		if (fecha == "") {
+			Date fecha_Act = new Date();
+			fecha = new SimpleDateFormat("yyyy-MM-dd").format(fecha_Act);
+		}
+		
 		Optional<AlumnoEntity> optinalAlumno = alumno.findById(idAlumno);
 		AlumnoEntity a = optinalAlumno.get();
 		Optional<AsignaturasEntity> optinalAsignatura = asignatura.findById(idAsignatura);
 		AsignaturasEntity asig = optinalAsignatura.get();
-		MatriculasEntity m =new MatriculasEntity(a,asig,fecha,10);
+		MatriculasEntity m =new MatriculasEntity(a,asig,fecha,1);
 		matriculaRepo.save(m);
-		CajaEntity caja = new CajaEntity(m,10);
+		CajaEntity caja = new CajaEntity(m,importe);
 		cajaRepo.save(caja);
 		return 1;
 	}

@@ -31,10 +31,7 @@ public class NotasController {
 	public String insertarNota(@RequestParam("asignaturas") Integer idAsignatura,
 			@RequestParam(value = "alumnos") Integer idAlumno, @RequestParam(value = "nota") Integer nota,
 			@RequestParam(value = "fecha") String fecha, ModelMap model) {
-		if (fecha == "") {
-			Date fecha_Act = new Date();
-			fecha = new SimpleDateFormat("yyyy-MM-dd").format(fecha_Act);
-		}
+		
 		model.addAttribute("listaAlumnos", combo.comboAlumnos());
 		model.addAttribute("listaAsignaturas", combo.comboAsignaturas());
 		notas.insertarNotas(idAsignatura, idAlumno, nota, fecha);

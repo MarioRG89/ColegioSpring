@@ -1,5 +1,7 @@
 package com.mario.colegio.daos.imp;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +30,7 @@ public class NotasDAOImpl implements NotasDAO {
 	@Override
 	public List<Notas> obtenerNotas(Integer idAlumno, String nombreAlumno, String nombreAsignatura, Integer nota,
 			String fecha) {
+		
 		List<Notas> listaNotas = notasRepository.buscaNotas(idAlumno, nota, fecha, nombreAlumno, nombreAsignatura);
 		return listaNotas;
 	}
@@ -35,12 +38,17 @@ public class NotasDAOImpl implements NotasDAO {
 	@Override
 	public List<Notas> obtenerNotasPorAlumnoAsignaturaFecha(String nombreAlumno,
 			String nombreAsignatura, String fecha) {
+		
 		List<Notas> listaNotas = notasRepository.buscaNotasAlumnoAsignatura(fecha, nombreAlumno, nombreAsignatura);
 		return listaNotas;
 	}
 
 	@Override
 	public Integer insertarNotas(Integer idAsignatura, Integer idAlumno, Integer nota, String fecha) {
+		if (fecha == "") {
+			Date fecha_Act = new Date();
+			fecha = new SimpleDateFormat("yyyy-MM-dd").format(fecha_Act);
+		}
 		Optional<AlumnoEntity> optinalAlumno = alumno.findById(idAlumno);
 		AlumnoEntity a = optinalAlumno.get();
 		Optional<AsignaturasEntity> optinalAsignatura = asignatura.findById(idAsignatura);
