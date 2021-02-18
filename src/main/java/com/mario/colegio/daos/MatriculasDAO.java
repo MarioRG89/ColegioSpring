@@ -9,4 +9,5 @@ public interface MatriculasDAO {
 			String fecha);
 	Integer insertarMatriculas(Integer idAsignatura, Integer idAlumno, String fecha, Double importe);
 	Integer borrarMatriculas(Integer id);
+	Integer calcularNumeroAsignaturas(Integer idAlumno);
 }

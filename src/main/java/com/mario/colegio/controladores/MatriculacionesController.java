@@ -6,13 +6,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mario.colegio.daos.CombosDAO;
 import com.mario.colegio.daos.MatriculasDAO;
+import com.mario.colegio.negocio.Negocio;
 
 @Controller
 public class MatriculacionesController {
-
+	@Autowired
+	private Negocio nego;
 	@Autowired
 	private MatriculasDAO matriculas;
 	
@@ -38,7 +41,7 @@ public class MatriculacionesController {
 	}
 	@PostMapping(value="insertarmatriculacion")
 	public String InsertarPost(@RequestParam(value="asignaturas",required = false)Integer idAsignatura,@RequestParam(value="alumnos",required = false)Integer idAlumno,
-			@RequestParam(value="fecha")String fecha,ModelMap model) {
+			@RequestParam(value="tasa")Double tasa,@RequestParam(value="fecha")String fecha,ModelMap model) {
 		model.addAttribute("listaAlumnos", combo.comboAlumnos());
 		model.addAttribute("listaAsignaturas",combo.comboAsignaturas());
 		matriculas.insertarMatriculas(idAsignatura, idAlumno, fecha,10.0);
@@ -60,7 +63,15 @@ public class MatriculacionesController {
 		matriculas.borrarMatriculas(id);
 		return "vistas/matriculaciones/borrarMatriculaciones";
 	}
+	
 	@PostMapping(value="tasa")
-	public void calculaTasa() {
+	@ResponseBody
+	public Double calculaTasa(@RequestParam(value="idAsig",required = false)Integer idAsignatura,@RequestParam(value="idAlum",required = false)Integer idAlumno,
+			@RequestParam(value="tasa")Double tasa,ModelMap model){
+		model.addAttribute("listaAlumnos", combo.comboAlumnos());
+		model.addAttribute("listaAsignaturas",combo.comboAsignaturas());
+		tasa=nego.obtenerTasa(idAlumno, idAsignatura);
+		return 25.0;
+		
 	}
 }

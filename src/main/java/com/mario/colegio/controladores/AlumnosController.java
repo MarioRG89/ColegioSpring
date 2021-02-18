@@ -1,7 +1,5 @@
 package com.mario.colegio.controladores;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mario.colegio.daos.AlumnoDao;
 import com.mario.colegio.daos.CombosDAO;
-import com.mario.colegio.dtos.Alumno;
-import com.mario.colegio.entidades.AlumnoEntity;
-import com.mario.colegio.repositories.AlumnoRepository;
 
 @Controller
 public class AlumnosController {
@@ -23,10 +19,10 @@ public class AlumnosController {
 
 	@Autowired
 	private CombosDAO combo;
-
+	
 	@Autowired
-	private AlumnoRepository alumnoRepository;
-
+	private AlumnoDao alumno;
+	
 	@GetMapping(value = "listadoalumnos")
 	public String Lista() {
 		return "vistas/alumnos/listadoAlumnos";
@@ -35,8 +31,7 @@ public class AlumnosController {
 	@PostMapping(value = "listadoalumnos")
 	public String ListadoAlumnos(@RequestParam(value = "id",required = false)Integer id,
 			@RequestParam("nombre")String nombre,ModelMap model) {
-		List<Alumno> listaAlumnos= alumnoRepository.buscaAlumnoporIdyNombre(id, nombre);
-		model.addAttribute("lista",listaAlumnos);	
+		model.addAttribute("lista",alumno.obtenerAlumnosporIdyNombre(id, nombre));	
 		return "vistas/alumnos/listadoAlumnos";
 		
 	}
@@ -51,10 +46,8 @@ public class AlumnosController {
 	public String InsertarAlumno(@RequestParam(value = "id", required = false) Integer id,
 			@RequestParam("nombre") String nombre, @RequestParam(value = "municipios") Integer idMunicipio,
 			@RequestParam(value = "familiaNumerosa") Integer familiaNumerosa, ModelMap model) {
-		familiaNumerosa = (familiaNumerosa == null) ? 0 : 1;
-		AlumnoEntity a = new AlumnoEntity(id, nombre, idMunicipio, familiaNumerosa);
-		alumnoRepository.save(a);
 		model.addAttribute("comboMunicipios", combo.comboMunicipios());
+		alumno.insertarAlumnos(id, nombre, idMunicipio, familiaNumerosa);
 		return "vistas/alumnos/insertarAlumnos";
 	}
 	@GetMapping(value="formularioborraralumnos")
@@ -66,15 +59,15 @@ public class AlumnosController {
 	@PostMapping(value="formularioborraralumnos")
 	public String ListadoBorrar(@RequestParam(value = "id",required = false)Integer id,
 			@RequestParam("nombre")String nombre,ModelMap model) {
-		List<Alumno> listaAlumnos= alumnoRepository.buscaAlumnoporIdyNombre(id, nombre);
-		model.addAttribute("lista",listaAlumnos);	
+		
+		model.addAttribute("lista",alumno.obtenerAlumnosporIdyNombre(id, nombre));	
 		return "vistas/alumnos/borrarAlumnos";
 		
 	}
 	
 	@PostMapping(value="borraralumno")
 	public String borrarAlumno(@RequestParam(value = "id",required = false)Integer id) {
-		alumnoRepository.deleteById(id);
+		
 		return "vistas/alumnos/borrarAlumnos";
 		
 	}
@@ -87,8 +80,8 @@ public class AlumnosController {
 	@PostMapping(value="formularioactualizaralumnos")
 	public String ListadoActualizarA(@RequestParam(value = "id", required = false) Integer id,
 			@RequestParam("nombre") String nombre, ModelMap model) {
-		List<Alumno> listaAlumnos= alumnoRepository.buscaAlumnoporIdyNombre(id, nombre);
-		model.addAttribute("lista",listaAlumnos);
+		
+		model.addAttribute("lista",alumno.obtenerAlumnosporIdyNombre(id, nombre));
 		model.addAttribute("listaMunicipios", combo.comboMunicipios());
 		return "vistas/alumnos/actualizarAlumnos";
 		
@@ -97,11 +90,10 @@ public class AlumnosController {
 	public String ActualizarAlumno(@RequestParam(value = "id", required = false) Integer id,
 			@RequestParam("nombre") String nombre, @RequestParam(value = "municipios") Integer idMunicipio,
 			@RequestParam(value = "familiaNumerosa") Integer familiaNumerosa, ModelMap model) {
-		familiaNumerosa = (familiaNumerosa == null) ? 0 : 1;
-	
+		
+		alumno.actualizarAlumnos(id, nombre, idMunicipio, familiaNumerosa);
 		model.addAttribute("listaMunicipios", combo.comboMunicipios());
-		AlumnoEntity alumno=new AlumnoEntity(id,nombre,idMunicipio,familiaNumerosa);
-		alumnoRepository.save(alumno);
+		
 		return "vistas/alumnos/actualizarAlumnos";
 		
 	}

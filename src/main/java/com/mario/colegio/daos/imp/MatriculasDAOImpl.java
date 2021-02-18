@@ -22,13 +22,13 @@ public class MatriculasDAOImpl implements MatriculasDAO {
 	
 	@Autowired
 	private MatriculacionesRepository matriculaRepo;
-	
 	@Autowired
 	private AlumnoRepository alumno;
 	@Autowired
 	private AsignaturaRepository asignatura;
 	@Autowired
 	private CajaRepository cajaRepo;
+	
 	@Override
 	public List<Matriculas> obtenerMatriculas(Integer idAsignatura, String nombreAsignatura,String nombreAlumno, Integer idAlumno,
 			String fecha) {
@@ -54,6 +54,12 @@ public class MatriculasDAOImpl implements MatriculasDAO {
 		cajaRepo.deleteById(id);
 		matriculaRepo.deleteById(id);
 		return 1;
+	}
+
+	@Override
+	public Integer calcularNumeroAsignaturas(Integer idAlumno) {
+		
+		return matriculaRepo.calculaNumAsignaturas(idAlumno);
 	}
 
 

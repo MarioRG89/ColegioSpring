@@ -1,14 +1,15 @@
 package com.mario.colegio.negocio;
 
-import com.mario.colegio.daos.AsignaturasDAO;
+import org.springframework.stereotype.Service;
 
+@Service
 public class Negocio implements NegocioIN {
 
 	public Negocio() {
 
 	}
 
-	public double obtenerTasa(String idAlumno, String idAsignatura) {
+	public double obtenerTasa(Integer idAlumno, Integer idAsignatura) {
 		return 0;
 
 		/*int numAsig = a.calcularNumeroAsignaturas(idAlumno);

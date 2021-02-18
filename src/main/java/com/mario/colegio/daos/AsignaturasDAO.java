@@ -10,6 +10,5 @@ public interface AsignaturasDAO {
 	Integer insertarAsignaturas(Integer id, String nombre, Integer curso, Double tasa);
 	Integer actualizarAsignaturas(Integer id, String nombre, Integer curso, Double tasa);
 	Integer borrarAsignatura(Integer id);
-	Integer calcularNumeroAsignaturas(String idAlumno);
-	double recuperarTasaAsignatura(String idAsignatura);
+	double recuperarTasaAsignatura(Integer idAsignatura );
 }

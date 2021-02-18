@@ -20,5 +20,6 @@ public interface MatriculacionesRepository extends CrudRepository<MatriculasEnti
 			+ "and (asig.id like concat('%',:idAsignatura,'%') or :idAsignatura is null) "
 			+ "and m.fecha like concat ('%',:fecha,'%')")
    List<Matriculas>buscaMatriculas(@Param("idAlumno")Integer idAlumno,@Param("nombreAlumno")String nombreAlumno,@Param("nombreAsignatura")String nombreAsignatura,@Param("idAsignatura")Integer idAsignatura,@Param("fecha")String fecha) ;
-
+	@Query(value="select count(*) from com.mario.colegio.entidades.MatriculasEntity m where (m.alumnos.id like concat('%',:idAlumno,'%') or :idAlumno is null)")
+	Integer calculaNumAsignaturas(@Param("idAlumno")Integer idAlumno);
 }

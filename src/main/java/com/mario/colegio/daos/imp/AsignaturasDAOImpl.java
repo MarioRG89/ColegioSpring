@@ -1,6 +1,7 @@
 package com.mario.colegio.daos.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,16 +44,12 @@ public class AsignaturasDAOImpl implements AsignaturasDAO{
 		return 1;
 	}
 
-	@Override
-	public Integer calcularNumeroAsignaturas(String idAlumno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public double recuperarTasaAsignatura(String idAsignatura) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double recuperarTasaAsignatura(Integer idAsignatura) {
+		Optional<AsignaturasEntity> optinalAsignatura = asignaturaRepository.findById(idAsignatura);
+		AsignaturasEntity asig = optinalAsignatura.get();
+		return asig.getTasa();
 	}
 
 }
