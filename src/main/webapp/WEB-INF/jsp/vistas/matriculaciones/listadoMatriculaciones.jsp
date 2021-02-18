@@ -14,7 +14,7 @@
 </head>
 <body>
 	<h2>Listado de Matriculaciones</h2>
-	<%@include file="/menu.html"%>
+	<%@include file="../../menu.html"%>
 	
 	<div class="container">
 		<div class="form">
