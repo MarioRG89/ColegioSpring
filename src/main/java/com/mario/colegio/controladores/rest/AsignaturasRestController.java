@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mario.colegio.daos.AsignaturasDAO;
 import com.mario.colegio.dtos.Asignaturas;
-import com.mario.colegio.entidades.AlumnoEntity;
 import com.mario.colegio.entidades.AsignaturasEntity;
 import com.mario.colegio.repositories.AsignaturaRepository;
 
