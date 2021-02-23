@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mario.colegio.daos.MatriculasDAO;
 import com.mario.colegio.dtos.Matriculas;
+import com.mario.colegio.dtos.Tasa;
 import com.mario.colegio.dtos.TasaDto;
 import com.mario.colegio.entidades.MatriculasEntity;
 import com.mario.colegio.negocio.NegocioIN;
@@ -37,10 +38,10 @@ public class MatriculasRestController {
 		return matriculasRepository.findById(id);
 	}
 	@GetMapping(value = "/matriculas" )
-	public List<Matriculas> listarMatriculas(@RequestParam(value = "idAsig", required = false) Integer idAsignatura,
-			@RequestParam(value = "nombreAsig", required = false) String nombreAsignatura,
-			@RequestParam(value = "idAlum", required = false) Integer idAlumno,
-			@RequestParam(value = "nombreAlum",required=false) String nombreAlumno, @RequestParam(value = "fecha",required=false) String fecha) {
+	public List<Matriculas> listarMatriculas(@RequestParam(value = "idAsignatura", required = false) Integer idAsignatura,
+			@RequestParam(value = "nombreAsignatura", required = false) String nombreAsignatura,
+			@RequestParam(value = "idAlumno", required = false) Integer idAlumno,
+			@RequestParam(value = "nombreAlumno",required=false) String nombreAlumno, @RequestParam(value = "fecha",required=false) String fecha) {
 		return matriculasDao.obtenerMatriculas(idAsignatura, nombreAsignatura, nombreAlumno, idAlumno, fecha);
 	}
 	@DeleteMapping(value = "/matriculas/{id}")
@@ -57,11 +58,9 @@ public class MatriculasRestController {
 
 	}
 	@PostMapping(value="/tasa")
-	public ResponseEntity<String> calculaTasa(@RequestBody TasaDto tasa) {
+	public Tasa calculaTasa(@RequestBody TasaDto tasa) {
 		
-		negocio.obtenerTasa(tasa.getIdAlumno(), tasa.getIdAsignatura());
-		
-		return new ResponseEntity<>("Obtenida  tasa", HttpStatus.OK);
+		return new Tasa(negocio.obtenerTasa(tasa.getIdAlumno(), tasa.getIdAsignatura()));
 		
 		
 	}

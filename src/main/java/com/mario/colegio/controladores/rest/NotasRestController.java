@@ -66,7 +66,7 @@ public class NotasRestController {
 		
 		notasDao.modificarNotas(nota.getId(), nota.getIdAlumno(), nota.getIdAsignatura(), nota.getNota(), nota.getFecha());
 
-		return new ResponseEntity<>("Insercion Correcta", HttpStatus.OK);
+		return new ResponseEntity<>("Modificacion Correcta", HttpStatus.OK);
 
 	}
 }
