@@ -8,6 +8,7 @@ public class Matriculas {
 	private String nombreAlumno;
 	private int activo;
 	private String fecha;
+	private double tasa;
 	
 	
 	
@@ -22,6 +23,39 @@ public class Matriculas {
 		this.activo = activo;
 		this.fecha = fecha;
 	}
+
+	
+	
+	
+	public Matriculas(int id, int idAsignatura, String nombreAsignatura, int idAlumno, String nombreAlumno, int activo,
+			String fecha, double tasa) {
+		super();
+		this.id = id;
+		this.idAsignatura = idAsignatura;
+		this.nombreAsignatura = nombreAsignatura;
+		this.idAlumno = idAlumno;
+		this.nombreAlumno = nombreAlumno;
+		this.activo = activo;
+		this.fecha = fecha;
+		this.tasa = tasa;
+	}
+
+
+
+
+	public double getTasa() {
+		return tasa;
+	}
+
+
+
+
+	public void setTasa(double tasa) {
+		this.tasa = tasa;
+	}
+
+
+
 
 	public Matriculas() {
 		// TODO Auto-generated constructor stub

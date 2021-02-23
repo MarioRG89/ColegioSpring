@@ -39,7 +39,7 @@ public class MatriculasDAOImpl implements MatriculasDAO {
 	}
 
 	@Override
-	public Integer insertarMatriculas(Integer idAsignatura, Integer idAlumno, String fecha, Double importe) {
+	public Integer insertarMatriculas(Integer idAsignatura, Integer idAlumno, String fecha, Double tasa) {
 		if (fecha == "") {
 			Date fecha_Act = new Date();
 			fecha = new SimpleDateFormat("yyyy-MM-dd").format(fecha_Act);
@@ -51,7 +51,7 @@ public class MatriculasDAOImpl implements MatriculasDAO {
 		AsignaturasEntity asig = optinalAsignatura.get();
 		MatriculasEntity m =new MatriculasEntity(a,asig,fecha,1);
 		matriculaRepo.save(m);
-		CajaEntity caja = new CajaEntity(m,importe);
+		CajaEntity caja = new CajaEntity(m,tasa);
 		cajaRepo.save(caja);
 		return 1;
 	}
