@@ -20,12 +20,12 @@ public class NotasEntity {
 	@Column(name="id")
 	private int id;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.PERSIST,fetch = FetchType.EAGER)
 	//@MapsId("id")
 	@JoinColumn(name="id_alumnos")
 	private AlumnoEntity alumnos;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.PERSIST,fetch = FetchType.EAGER)
 	//@MapsId("id")
 	@JoinColumn(name="id_asignaturas")
 	private AsignaturasEntity asignaturas;

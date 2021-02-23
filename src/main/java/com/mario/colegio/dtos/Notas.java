@@ -22,7 +22,7 @@ public class Notas {
 
 
 
-	public Notas(Integer idAlumno, Integer nota, String fecha, String nombreAlumno, String nombreAsignatura) {
+	public Notas(Integer idAlumno, String nombreAlumno, String nombreAsignatura, Integer nota, String fecha) {
 		super();
 		this.idAlumno = idAlumno;
 		this.nota = nota;
